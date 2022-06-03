@@ -5,7 +5,6 @@ import classes from './breakie.module.css';
 import fysisk from '../../assets/fysisk.svg';
 import social from '../../assets/social.svg';
 import mental from '../../assets/mental.svg';
-
 import Alert from '../../components/Alert/Alert';
 import End from '../../components/Breakieend/End';
 
@@ -34,7 +33,6 @@ const Breakie = () => {
     setLoading(false);
   };
 
-  // console.log(random);
 
   const updateRemainingTime = (s: any, m: any) => {
     setSeconds(s);
@@ -94,11 +92,11 @@ const Breakie = () => {
       );
   } else {
     if (random && random.type == 'fysisk') {
-      randomUrl = <img src={fysisk} alt='fysisk' />;
+      randomUrl = <img  src={fysisk} alt='fysisk'/>;
     } else if (random && random.type == 'social') {
-      randomUrl = <img src={social} alt='social' />;
+      randomUrl = <img  src={social} alt='social' />;
     } else {
-      randomUrl = <img src={mental} alt='social' />;
+      randomUrl = <img  src={mental} alt='social' />;
     }
   }
   const showEnd = () => {
@@ -119,11 +117,7 @@ const Breakie = () => {
     setStart(false);
     timer();
   };
-  const Openend=()=>{
-    return(
-      <End/>
-    )
-    }
+  
   return (
     <>
       {random ? (

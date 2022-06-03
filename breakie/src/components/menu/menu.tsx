@@ -35,15 +35,27 @@ const Menu = () => {
         </Link>
       </div>
     );
+  }
+  else if (x.pathname == '/input') {
+    return (
+      <div className={classes.menu}>
+        <Link to='/' className={classes.menu_link}>
+          <img className={classes.menu_icon} src={close} alt='close' />
+        </Link>
+      </div>
+    );
   } else {
     return (
       <div className={classes.menu}>
         <Link to='/' className={classes.menu_link}>
           <img className={classes.menu_icon} src={close} alt='close' />
         </Link>
-        <Link to='/input' className={classes.menu_link}>
+
+         {/* add new breakie knapp */}
+
+        {/* <Link to='/input' className={classes.menu_link}>
           <img className={classes.menu_icon} src={add} alt='add-breakie' />
-        </Link>
+        </Link> */}
       </div>
     );
   }

@@ -13,7 +13,6 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 import { db } from '../../backend/firebase';
-import Filter from '../filter/Filter';
 const Form = () => {
   const [activity, setActivity] = useState('');
   const [type, setType] = useState(new Array());
@@ -21,14 +20,14 @@ const Form = () => {
   const [time, setTime] = useState('');
   const [timesArray, setTimesArray] = useState(new Array());
 
-
+  const [istoggle, setIstoggle] = useState(false);
 
   const { getData } = useContext(AppContext);
 
 
   /////////////////////Firebase ////////////////////
   const getbreakie = async () => {
-    if (type.length) {
+    if (type.length && !timesArray.length) {
       const q1 = query(collection(db, 'Breakies'), where('type', 'in', type));
       const breakieSnapshot = await getDocs(q1);
       const typelist: DocumentData[] = breakieSnapshot.docs.map((doc) =>
@@ -36,33 +35,32 @@ const Form = () => {
       );
       console.log(typelist);
       getData(typelist);
-
-
     }
-      if (timesArray.length ) {
-     const q2 = query(
-       collection(db, 'Breakies'),
-       where('time', 'in', timesArray)
-      );
+
+    if (timesArray.length && !type.length) {
+      console.log(timesArray.length)
+      console.log(timesArray)
+      console.log(time)
+      const q2 = query(collection(db, 'Breakies'), where('time', 'in', timesArray));
       const timeSnapshot = await getDocs(q2);
+      console.log(timeSnapshot)
       const timelist: DocumentData[] = timeSnapshot.docs.map((doc) =>
         doc.data()
       );
+      console.log(timelist);
       getData(timelist);
-
     }
 
-    if(type.length&&timesArray.length){
+    if (type.length && timesArray.length) {
       const q = query(
         collection(db, 'Breakies'),
         where('type', 'in', type)
-       );
-       const breakieSnapshot = await getDocs(q);
-       const breakielist: DocumentData[] = breakieSnapshot.docs.map((doc) =>
-         doc.data()
-       ).filter((i:any)=>i.time=== timesArray[Math.floor(Math.random() * timesArray.length)])
-     getData(breakielist)
-
+      );
+      const breakieSnapshot = await getDocs(q);
+      const breakielist: DocumentData[] = breakieSnapshot.docs.map((doc) =>
+        doc.data()
+      ).filter((i: any) => i.time === timesArray[Math.floor(Math.random() * timesArray.length)])
+      getData(breakielist)
     }
 
   };
@@ -97,7 +95,8 @@ const Form = () => {
       let A: any = [...type];
       let idx: number = A.findIndex((i: any) => i === x);
       type.splice(idx);
-    
+      setIstoggle(!istoggle)
+
     }
   };
 
@@ -109,7 +108,7 @@ const Form = () => {
       let B: any = [...timesArray];
       let idx: number = B.findIndex((i: any) => i === x);
       timesArray.splice(idx);
-    
+      setIstoggle(!istoggle)
     }
   };
 
@@ -121,11 +120,7 @@ const Form = () => {
         </div>
         <div className={classes.activities}>
           <div
-            // className={
-            //   activity === 'fysisk'
-            //     ? `${classes.formcontrol} ${classes.active} `
-            //     : classes.formcontrol
-            // }
+
             className={
               type.find((item) => item === 'fysisk')
                 ? `${classes.formcontrol} ${classes.active} `
@@ -137,11 +132,7 @@ const Form = () => {
             <span>fysisk</span>
           </div>
           <div
-            // className={
-            //   activity === 'mental'
-            //     ? `${classes.formcontrol} ${classes.active} `
-            //     : classes.formcontrol
-            // }
+
             className={
               type.find((item) => item === 'mental')
                 ? `${classes.formcontrol} ${classes.active} `
@@ -153,11 +144,7 @@ const Form = () => {
             <span>mental</span>
           </div>
           <div
-            // className={
-            //   activity === 'social'
-            //     ? `${classes.formcontrol} ${classes.active} `
-            //     : classes.formcontrol
-            // }
+
             className={
               type.find((item) => item === 'social')
                 ? `${classes.formcontrol} ${classes.active} `

@@ -10,12 +10,12 @@ const Modal = ({
   addTolocal,
   remove,
   itemname,
-  removeFromLocalStroate, 
+  removeFromLocalStroate,
 
 }) => {
 
-  
-  
+
+
 
   const inputBreakie = useRef(null);
   const add = () => {
@@ -48,9 +48,9 @@ const Modal = ({
     }
   };
 
- 
+
   return createPortal(
-    <div className={ classes.overlay}>
+    <div className={classes.overlay}>
       <div className={classes.modal}>
         {msg()}
         <h1>{name}</h1>
@@ -66,10 +66,10 @@ const Modal = ({
 
         {remove && <h2>Är du säker på det? </h2>}
         <div className={classes.overlayBtnBox}>
-          {remove &&
-          <button className={classes.closebtn} onClick={() => closeModal()}>
-            {name ? 'Okej' : 'Avbryt!'}
-          </button>}
+          {remove || name &&
+            <button className={classes.closebtn} onClick={() => closeModal()}>
+              {name ? 'Okej' : 'Avbryt!'}
+            </button>}
 
           {localStorage && (
             <button className={classes.closebtn} onClick={() => add()}>
@@ -81,8 +81,8 @@ const Modal = ({
               jadå!
             </button>
           )}
-          
-      
+
+
 
         </div>
       </div>

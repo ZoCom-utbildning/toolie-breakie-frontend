@@ -1,10 +1,8 @@
 .App {
   background: linear-gradient(225deg, #33ba51 0%, #369f8c 100%);
-  min-height: 145vh;
+  min-height: 150vh;
   width: 100vw;
   margin: 0;
-
-  /* overflow: scroll; */
 }
 html {
   font-size: 62.5%;

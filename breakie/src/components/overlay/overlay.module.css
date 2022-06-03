@@ -1,12 +1,16 @@
 .favo {
   width: 134px;
   height: 36px;
-  border: 0.8px solid #fbfbfb;
   box-sizing: border-box;
   border-radius: 4px;
   background: rgba(34, 34, 34, 0.5);
   opacity: 0.96;
+  border: 0.8px solid #AFAFAF;
+  color: #AFAFAF;
+}
+.favo:hover{
   color: #ffffff;
+  border: 0.8px solid #fbfbfb;
 }
 .close {
   position: absolute;
