@@ -7,6 +7,7 @@ import social from '../../assets/social.svg';
 import mental from '../../assets/mental.svg';
 import { useNavigate } from 'react-router-dom';
 import Alert from '../../components/Alert/Alert';
+import End from '../../components/Breakieend/End';
 
 const Breakie = () => {
   const { activities } = useContext(AppContext);
@@ -116,7 +117,11 @@ const Breakie = () => {
     setStart(false);
     timer();
   };
-
+  const Openend=()=>{
+    return(
+      <End/>
+    )
+    }
   return (
     <>
       {random ? (
@@ -153,7 +158,7 @@ const Breakie = () => {
               {!start && (
                 <button
                   disabled={!end}
-                  onClick={() => console.log('clickable')}
+                  onClick={() => Openend()}
                   className={
                     end
                       ? `${classes.avsluta} ${classes.active} `

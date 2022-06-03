@@ -13,6 +13,7 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 import { db } from '../../backend/firebase';
+import Filter from '../filter/Filter';
 const Form = () => {
   const [activity, setActivity] = useState('');
   const [type, setType] = useState(new Array());
@@ -20,9 +21,10 @@ const Form = () => {
   const [time, setTime] = useState('');
   const [timesArray, setTimesArray] = useState(new Array());
 
-  const [istoggle, setIsToggle] = useState(false);
+
 
   const { getData } = useContext(AppContext);
+
 
   /////////////////////Firebase ////////////////////
   const getbreakie = async () => {
@@ -34,17 +36,35 @@ const Form = () => {
       );
       console.log(typelist);
       getData(typelist);
-    } else if (timesArray.length) {
-      const q2 = query(
-        collection(db, 'Breakies'),
-        where('time', 'in', timesArray)
+
+
+    }
+      if (timesArray.length ) {
+     const q2 = query(
+       collection(db, 'Breakies'),
+       where('time', 'in', timesArray)
       );
       const timeSnapshot = await getDocs(q2);
       const timelist: DocumentData[] = timeSnapshot.docs.map((doc) =>
         doc.data()
       );
       getData(timelist);
+
     }
+
+    if(type.length&&timesArray.length){
+      const q = query(
+        collection(db, 'Breakies'),
+        where('type', 'in', type)
+       );
+       const breakieSnapshot = await getDocs(q);
+       const breakielist: DocumentData[] = breakieSnapshot.docs.map((doc) =>
+         doc.data()
+       ).filter((i:any)=>i.time=== timesArray[Math.floor(Math.random() * timesArray.length)])
+     getData(breakielist)
+
+    }
+
   };
   /////////////////////////////////////////////////////////////77
   const navigate = useNavigate();
@@ -77,7 +97,7 @@ const Form = () => {
       let A: any = [...type];
       let idx: number = A.findIndex((i: any) => i === x);
       type.splice(idx);
-      setIsToggle(!istoggle);
+    
     }
   };
 
@@ -89,7 +109,7 @@ const Form = () => {
       let B: any = [...timesArray];
       let idx: number = B.findIndex((i: any) => i === x);
       timesArray.splice(idx);
-      setIsToggle(!istoggle);
+    
     }
   };
 

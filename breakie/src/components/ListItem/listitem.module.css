@@ -45,13 +45,3 @@
 
   
 }
-input[type='checkbox']:checked:before
-{
-    content:'x';
-    display:block;
-  
-    position:absolute;
-  
-    background:none #ACACB8;
-    opacity:0.5;
-}
