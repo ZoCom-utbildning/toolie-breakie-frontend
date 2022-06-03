@@ -5,7 +5,7 @@ import classes from './breakie.module.css';
 import fysisk from '../../assets/fysisk.svg';
 import social from '../../assets/social.svg';
 import mental from '../../assets/mental.svg';
-import { useNavigate } from 'react-router-dom';
+
 import Alert from '../../components/Alert/Alert';
 import End from '../../components/Breakieend/End';
 
@@ -18,8 +18,7 @@ const Breakie = () => {
   const [img, setImg] = useState('');
   const [start, setStart] = useState(true);
   const [end, setEnd] = useState(false);
-
-  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
   const getRandom = async () => {
     //Random Breakie
@@ -84,7 +83,7 @@ const Breakie = () => {
     randomUrl =
       random && random.URL.includes('youtube') ? (
         <embed
-          src={`${newURL}?autoplay=1&mute=1`}
+          src={`${newURL}`}
           width='100%'
           type='video/mp4'
           height='100%'
@@ -102,6 +101,9 @@ const Breakie = () => {
       randomUrl = <img src={mental} alt='social' />;
     }
   }
+  const showEnd = () => {
+    setShow(!show);
+  };
 
   //Type icon in breakie header
   let imgtype;
@@ -158,7 +160,7 @@ const Breakie = () => {
               {!start && (
                 <button
                   disabled={!end}
-                  onClick={() => Openend()}
+                  onClick={showEnd}
                   className={
                     end
                       ? `${classes.avsluta} ${classes.active} `
@@ -174,6 +176,7 @@ const Breakie = () => {
       ) : (
         'loading'
       )}
+      {show && <End />}
     </>
   );
 };
