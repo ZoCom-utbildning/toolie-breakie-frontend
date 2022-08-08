@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/activityContext';
 import { DocumentData } from 'firebase/firestore';
 import classes from './breakie.module.css';

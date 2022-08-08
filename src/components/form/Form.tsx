@@ -15,17 +15,13 @@ import {
 import { db } from '../../backend/firebase';
 const Form = () => {
   const [activity, setActivity] = useState('');
-  const [type, setType] = useState(new Array());
-
+  const [type] = useState(new Array());
   const [time, setTime] = useState('');
-  const [timesArray, setTimesArray] = useState(new Array());
-
+  const [timesArray] = useState(new Array());
   const [istoggle, setIstoggle] = useState(false);
 
   const { getData } = useContext(AppContext);
 
-
-  /////////////////////Firebase ////////////////////
   const getbreakie = async () => {
     if (type.length && !timesArray.length) {
       const q1 = query(collection(db, 'Breakies'), where('type', 'in', type));
@@ -38,16 +34,12 @@ const Form = () => {
     }
 
     if (timesArray.length && !type.length) {
-      console.log(timesArray.length)
-      console.log(timesArray)
-      console.log(time)
       const q2 = query(collection(db, 'Breakies'), where('time', 'in', timesArray));
       const timeSnapshot = await getDocs(q2);
       console.log(timeSnapshot)
       const timelist: DocumentData[] = timeSnapshot.docs.map((doc) =>
         doc.data()
       );
-      console.log(timelist);
       getData(timelist);
     }
 
@@ -72,7 +64,7 @@ const Form = () => {
       getbreakie();
       navigate('/breakie');
     } else {
-      navigate('/manuall');
+      navigate('/manual');
     }
   };
   //////////////////////////////////////////////////////////////////7
@@ -119,7 +111,7 @@ const Form = () => {
           <h2>Typ av breakie</h2>
         </div>
         <div className={classes.activities}>
-          <div
+          <figure
 
             className={
               type.find((item) => item === 'fysisk')
@@ -129,9 +121,9 @@ const Form = () => {
             onClick={() => Toggle('fysisk')}
           >
             <img src={fysisk} alt='fysisk' />
-            <span>fysisk</span>
-          </div>
-          <div
+            <figcaption>fysisk</figcaption>
+          </figure>
+          <figure
 
             className={
               type.find((item) => item === 'mental')
@@ -141,9 +133,9 @@ const Form = () => {
             onClick={() => Toggle('mental')}
           >
             <img src={mental} alt='mental' />
-            <span>mental</span>
-          </div>
-          <div
+            <figcaption>mental</figcaption>
+          </figure>
+          <figure
 
             className={
               type.find((item) => item === 'social')
@@ -153,13 +145,13 @@ const Form = () => {
             onClick={() => Toggle('social')}
           >
             <img src={social} alt='social' />
-            <span>social</span>
-          </div>
+            <figcaption>social</figcaption>
+          </figure>
         </div>
         <div className={classes.formHeader}>
           <h2>Tidsåtgång</h2>
         </div>
-        <div className={classes.activities}>
+        <div className={classes.time}>
           <div
             className={
               timesArray.find((item) => item === '1')

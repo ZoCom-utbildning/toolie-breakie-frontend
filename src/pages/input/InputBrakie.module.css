@@ -1,32 +1,26 @@
 .form {
   display: flex;
-  flex-direction: column;
-
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
+
 form {
-  margin: 100px auto;
   background: rgba(255, 255, 255, 1);
-
-  border: 1px solid black;
-  width: 580px;
-
+  max-width: 400px;
+  width: 100%;
   border-radius: 4px;
 }
 
 .header {
   background: rgba(34, 34, 34, 1);
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Fira Sans;
+  font-family: 'Fira Sans', sans-serif;
 }
 .header h2 {
-  font-size: 2.2rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  line-height: 25px;
-  letter-spacing: 0em;
   color: rgba(255, 255, 255, 1);
 }
 

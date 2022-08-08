@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import classes from './menu.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import close from '../../assets/close.png';
-import add from '../../assets/add.png';
 import save from '../../assets/save.png';
 import { AppContext } from '../../context/activityContext';
 
@@ -13,7 +12,7 @@ const Menu = () => {
     toggleOverlay();
   };
   const x = useLocation();
-  if (x.pathname == '/manuall') {
+  if (x.pathname == '/manual') {
     return (
       <div className={classes.menu}>
         <Link to='/'>
@@ -50,12 +49,6 @@ const Menu = () => {
         <Link to='/' className={classes.menu_link}>
           <img className={classes.menu_icon} src={close} alt='close' />
         </Link>
-
-         {/* add new breakie knapp */}
-
-        {/* <Link to='/input' className={classes.menu_link}>
-          <img className={classes.menu_icon} src={add} alt='add-breakie' />
-        </Link> */}
       </div>
     );
   }
